@@ -152,3 +152,7 @@ configs/local/default.yaml
 
 # Aim logging
 .aim
+
+# Config files for zsh
+.zshrc
+.p10k.zsh

@@ -1,5 +1,5 @@
 # Use a deep learning base image (PyTorch example)
-FROM pytorch/pytorch:2.6.0-cuda12.6-cudnn9-runtime
+FROM pytorch/pytorch:2.6.0-cuda12.6-cudnn9-devel
 
 # Prevent Python from buffering stdout/stderr
 ENV PYTHONUNBUFFERED=1
@@ -8,7 +8,7 @@ ENV PYTHONUNBUFFERED=1
 RUN rm -rf /opt/conda
 
 # Install necessary system dependencies, including Python3-pip
-RUN apt-get update && apt-get install -y git wget unzip python3-pip && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y git wget unzip python3-pip && ln -s /usr/bin/python3 /usr/bin/python && rm -rf /var/lib/apt/lists/*
 
 # Create a working directory for your project
 WORKDIR /app
@@ -30,7 +30,9 @@ COPY . .
 
 # ================================
 # PERSONAL ZSH CONFIGURATION
-# This section is for personal use and can be removed before publishing
+# This section is a personal preference
+# Can be removed/commented out if not needed.
+# Requires .zshrc and .p10k.zsh files in the same directory as the Dockerfile
 # =================================
 
 # Install Zsh and make it the default shell
@@ -50,3 +52,6 @@ COPY .p10k.zsh /root/.p10k.zsh
 
 # Disable Powerlevel10k configuration wizard
 RUN echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >>! ~/.zshrc
+
+# Add the app directory to the safe directory list
+RUN zsh -c 'source ~/.zshrc && git config --global --add safe.directory /app'

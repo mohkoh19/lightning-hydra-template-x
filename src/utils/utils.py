@@ -2,6 +2,7 @@ import warnings
 from importlib.util import find_spec
 from typing import Any, Callable, Dict, Optional, Tuple
 
+import torch
 from omegaconf import DictConfig
 
 from src.utils import pylogger, rich_utils
@@ -117,3 +118,12 @@ def get_metric_value(metric_dict: Dict[str, Any], metric_name: Optional[str]) ->
     log.info(f"Retrieved metric value! <{metric_name}={metric_value}>")
 
     return metric_value
+
+
+def set_matmul_precision(precision: str):
+    if torch.cuda.is_available() and precision is not None:
+        # Optionally, you can check the device name:
+        device_name = torch.cuda.get_device_name(0)
+        if "A100" in device_name:
+            torch.set_float32_matmul_precision(precision)
+            print(f"Set float32 matmul precision to {precision} for {device_name}")

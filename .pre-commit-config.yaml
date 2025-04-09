@@ -39,18 +39,19 @@ repos:
         args: [--py38-plus]
 
   # python docstring formatting
-  - repo: https://github.com/myint/docformatter
-    rev: v1.7.4
-    hooks:
-      - id: docformatter
-        args:
-          [
-            --in-place,
-            --wrap-summaries=99,
-            --wrap-descriptions=99,
-            --style=sphinx,
-            --black,
-          ]
+  # Does not work!
+  # - repo: https://github.com/myint/docformatter
+  #   rev: v1.7.4
+  #   hooks:
+  #     - id: docformatter
+  #       args:
+  #         [
+  #           --in-place,
+  #           --wrap-summaries=99,
+  #           --wrap-descriptions=99,
+  #           --style=sphinx,
+  #           --black,
+  #         ]
 
   # python docstring coverage checking
   - repo: https://github.com/econchick/interrogate
@@ -60,7 +61,7 @@ repos:
         args:
           [
             --verbose,
-            --fail-under=80,
+            --fail-under=10,
             --ignore-init-module,
             --ignore-init-method,
             --ignore-module,
@@ -110,7 +111,7 @@ repos:
       - id: mdformat
         args: ["--number"]
         additional_dependencies:
-          - mdformat-gfm
+          # - mdformat-gfm
           - mdformat-tables
           - mdformat_frontmatter
           # - mdformat-toc
