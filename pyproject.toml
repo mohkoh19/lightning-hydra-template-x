@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "multimodal-ssl"
+name = "PROJECT NAME"
 version = "0.1.0"
-description = "Predictive Self-Supervised Learning for Multi-View Representation Learning"
+description = "PROJECT DESCRIPTION"
 authors = ["Your Name <your.email@example.com>"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/mohkoh19/multimodal-ssl"
+repository = "REPOSITORY LINK"
 packages = [{ include = "src" }]
 
 [tool.poetry.dependencies]
